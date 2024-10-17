@@ -21,6 +21,8 @@ export class User {
 
     @Prop()
     name: string;
+    @Prop()
+    email: string;
 
     @Prop({select: false})
     password: string;
