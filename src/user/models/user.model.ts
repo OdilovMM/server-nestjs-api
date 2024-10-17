@@ -17,14 +17,12 @@ export type UserDocument = HydratedDocument<User>;
     }
 })
 export class User {
-
-    @Prop()
     _id?: mongoose.Types.ObjectId;
 
     @Prop()
     name: string;
 
-    @Prop()
+    @Prop({select: false})
     password: string;
    
     @Prop()
