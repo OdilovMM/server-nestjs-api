@@ -1,14 +1,14 @@
 /* eslint-disable prettier/prettier */
 import { BadRequestException, Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
 import {hash, compare} from 'bcrypt'
-
 import { InjectModel } from '@nestjs/mongoose';
 import { User, UserDocument } from './models/user.model';
-import { Model } from 'mongoose';
+import { Model, Types } from 'mongoose';
 import { CreateUserDto } from './dto/create-user.dto';
 import { SignInDto } from './dto/signin.dto';
 import { sign } from 'jsonwebtoken';
 import { UserDto } from './dto/user.dto';
+import {ObjectId} from 'mongodb';
 
 @Injectable()
 export class UserService {
@@ -39,6 +39,10 @@ export class UserService {
       }, 
     process.env.TOKEN_SECRET, 
     {expiresIn: process.env.EXPIRES_IN})
+  }
+
+  async findOneForMiddleware(_id: ObjectId): Promise<User> {
+    return await this.userModel.findById(_id)
   }
 
 
