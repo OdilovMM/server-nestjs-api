@@ -1,35 +1,33 @@
 /* eslint-disable prettier/prettier */
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  UseGuards,
+} from '@nestjs/common';
 import { TagService } from './tag.service';
 import { CreateTagDto } from './dto/create-tag.dto';
-import { UpdateTagDto } from './dto/update-tag.dto';
+import { Tag } from './models/tag.model';
+import { AuthenticationGuard } from 'src/utility/guards/authentication.guard';
+import { AuthorizeGuard } from 'src/utility/guards/authorize.guard';
+import { UserRoles } from 'src/utility/user-roles';
 
-@Controller('tag')
+@Controller('tags')
 export class TagController {
   constructor(private readonly tagService: TagService) {}
 
-  @Post()
-  create(@Body() createTagDto: CreateTagDto) {
-    return this.tagService.create(createTagDto);
+  @Post('create-tag')
+  @UseGuards(
+    AuthenticationGuard,
+    AuthorizeGuard([UserRoles.Admin, UserRoles.Author]),
+  )
+  async createTag(@Body() createTagDto: CreateTagDto): Promise<Tag> {
+    return await this.tagService.create(createTagDto);
   }
 
   @Get()
-  findAll() {
-    return this.tagService.findAll();
-  }
-
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.tagService.findOne(+id);
-  }
-
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateTagDto: UpdateTagDto) {
-    return this.tagService.update(+id, updateTagDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.tagService.remove(+id);
+  async findAll(): Promise<Tag[]> {
+    return await this.tagService.findAll();
   }
 }
