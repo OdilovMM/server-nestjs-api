@@ -17,7 +17,6 @@ export type CommentDocument = HydratedDocument<Comment>
 })
 
 export class Reply {
-    @Prop()
     _id?: mongoose.Types.ObjectId;
 
     @Prop({type: mongoose.Types.ObjectId, ref: 'User', index: true})
@@ -27,7 +26,7 @@ export class Reply {
     replyText: string;
 
     @Prop()
-    ReplyAt: Date;
+    replyAt: Date;
 }
 
 export class Comment {
@@ -35,7 +34,6 @@ export class Comment {
     @Prop({type: mongoose.Types.ObjectId, ref: 'Post', index: true})
     postId: string;
     
-    @Prop()
     _id?: mongoose.Types.ObjectId;
 
     @Prop({type: mongoose.Types.ObjectId, ref: 'User', index: true})

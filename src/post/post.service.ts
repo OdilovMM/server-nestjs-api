@@ -91,9 +91,26 @@ export class PostService {
     return post.likes;
   }
 
+  async findOneAndUpdateCommentCount(
+    id: ObjectId,
+    comment: boolean,
+  ): Promise<Post> {
+    const post = await this.postModel.findById(id);
+    if (!post) throw new NotFoundException('Post not found');
+
+    if (comment === true) {
+      post.totalComments = post.totalComments + 1;
+    } else {
+      post.totalComments = post.totalComments - 1;
+    }
+    return await post.save();
+  }
+
   // TODO get all posts with querying
 
-  async findAll(query: any) {
+  async findAll(
+    query: any,
+  ): Promise<{ filteredPostCount: number; posts: Post[]; limit: number }> {
     let limit: number;
     query.limit ? (limit = query.limit) : (limit = 3);
 

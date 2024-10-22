@@ -35,7 +35,7 @@ export class PostController {
 
   // TODO implement query too
   @Get()
-  async findAll(@Query() query: any) {
+  async findAll(@Query() query: any): Promise<{filteredPostCount: number, posts: PostClass[], limit: number}>  {
     return await this.postService.findAll(query) 
   }
 

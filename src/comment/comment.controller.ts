@@ -1,34 +1,55 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+/* eslint-disable prettier/prettier */
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Param,
+  UseGuards,
+} from '@nestjs/common';
 import { CommentService } from './comment.service';
 import { CreateCommentDto } from './dto/create-comment.dto';
-import { UpdateCommentDto } from './dto/update-comment.dto';
+import { AuthenticationGuard } from 'src/utility/guards/authentication.guard';
+import { CurrentUser } from 'src/utility/decorators/current-user.decorator';
+import { User } from 'src/user/models/user.model';
+import { Comment } from './models/comment.model';
+import { CreateReplyDto } from './dto/create-reply.dto';
 
-@Controller('comment')
+@Controller('comments')
 export class CommentController {
   constructor(private readonly commentService: CommentService) {}
 
-  @Post()
-  create(@Body() createCommentDto: CreateCommentDto) {
-    return this.commentService.create(createCommentDto);
+  // TODO adding a new comment
+  @Post('add-comment')
+  @UseGuards(AuthenticationGuard)
+  async create(
+    @Body() createCommentDto: CreateCommentDto,
+    @CurrentUser() currentUser: User,
+  ): Promise<Comment> {
+    return await this.commentService.create(createCommentDto, currentUser);
   }
 
-  @Get()
-  findAll() {
-    return this.commentService.findAll();
+  // TODO get comments
+
+  @Get('/:id')
+  @UseGuards(AuthenticationGuard)
+  async findAll(@Param('id') id: string): Promise<Comment[]> {
+    return await this.commentService.findAll(id);
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.commentService.findOne(+id);
+   // TODO getting single comment
+  @Get('/single/:commentId')
+  @UseGuards(AuthenticationGuard)
+  async findOne(@Param('commentId') commentId: string): Promise<Comment>  {
+    return await this.commentService.findOne(commentId);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateCommentDto: UpdateCommentDto) {
-    return this.commentService.update(+id, updateCommentDto);
+
+   // TODO getting single comment
+  @Post('/replies')
+  @UseGuards(AuthenticationGuard)
+  async createReply(@Body() createReplyDto: CreateReplyDto, @CurrentUser() currentUser: User) {
+    return await this.commentService.createReply(createReplyDto, currentUser)
   }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.commentService.remove(+id);
-  }
 }
