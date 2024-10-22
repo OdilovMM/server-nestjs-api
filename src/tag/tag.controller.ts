@@ -1,11 +1,6 @@
 /* eslint-disable prettier/prettier */
-import {
-  Controller,
-  Get,
-  Post,
-  Body,
-  UseGuards,
-} from '@nestjs/common';
+import { ObjectId } from 'mongodb';
+import { Controller, Get, Post, Body, UseGuards, Param } from '@nestjs/common';
 import { TagService } from './tag.service';
 import { CreateTagDto } from './dto/create-tag.dto';
 import { Tag } from './models/tag.model';
@@ -29,5 +24,10 @@ export class TagController {
   @Get()
   async findAll(): Promise<Tag[]> {
     return await this.tagService.findAll();
+  }
+
+  @Get(':id')
+  async findOne(@Param('id') id: string): Promise<Tag> {
+    return await this.tagService.findOne(new ObjectId(id));
   }
 }

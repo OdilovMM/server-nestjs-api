@@ -1,5 +1,6 @@
 /* eslint-disable prettier/prettier */
-import { Controller, Get, Post, Body, UseGuards } from '@nestjs/common';
+import { ObjectId } from 'mongodb';
+import { Controller, Get, Post, Body, UseGuards, Param } from '@nestjs/common';
 import { CategoryService } from './category.service';
 import { CreateCategoryDto } from './dto/create-category.dto';
 import { Category } from './models/category.model';
@@ -20,6 +21,11 @@ export class CategoryController {
   @Get()
   async findAll() : Promise<Category[]>  {
     return await this.categoryService.findAll();
+  }
+
+  @Get(':id')
+  async findOne(@Param('id') id: string): Promise<Category>{
+    return await this.categoryService.findOne(new ObjectId(id))
   }
   
 }

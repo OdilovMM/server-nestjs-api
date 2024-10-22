@@ -1,5 +1,6 @@
 /* eslint-disable prettier/prettier */
-import { Injectable } from '@nestjs/common';
+import { ObjectId } from 'mongodb';
+import {  Injectable, NotFoundException, Param } from '@nestjs/common';
 import { CreateCategoryDto } from './dto/create-category.dto';
 import { Category, CategoryDocument } from './models/category.model';
 import { Model } from 'mongoose';
@@ -19,5 +20,11 @@ export class CategoryService {
 
   async findAll(): Promise<Category[]> {
     return this.categoryModel.find();
+  }
+
+  async findOne( id: ObjectId): Promise<Category>{
+    const category = await this.categoryModel.findById(id)
+    if(!category) throw new NotFoundException('Category not found');
+    return category;
   }
 }

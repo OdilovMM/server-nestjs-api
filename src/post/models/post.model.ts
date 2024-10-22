@@ -41,7 +41,7 @@ export class Post {
     @Prop({type: mongoose.Types.ObjectId, ref: 'Tag', index: true})
     tags: string[];
 
-    @Prop({type: mongoose.Types.ObjectId, ref: 'User', index: true, default: []})
+    @Prop([{type: mongoose.Types.ObjectId, ref: 'User', index: true, default: []}])
     likes: string[];
 
     @Prop({default: 0})
