@@ -24,7 +24,7 @@
 
 ## Description
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+[GIthub Page](https://github.com/OdilovMM) framework TypeScript starter repository.
 
 ## Installation
 
@@ -62,11 +62,11 @@ $ npm run test:cov
 
 Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
 
-## Stay in touch
+## Stay in touch with this project's author
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+- Author - [Odilov Madaminjon]
+- Website - [PErsonal Web Portfolio](https://personal-web-portfolio-cms.vercel.app/)
+- LinkedIn - [LinkedIn](in/odilov-madaminjon-2b1414317)
 
 ## License
 
