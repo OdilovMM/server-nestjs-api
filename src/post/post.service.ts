@@ -60,7 +60,7 @@ export class PostService {
     const ids: ObjectId[] = postApproveDto.ids.map((id) => new ObjectId(id));
     const approve = await this.postModel.updateMany(
       { _id: { $in: ids } },
-      { $set: { approve: postApproveDto.approve } },
+      { $set: { approved: postApproveDto.approve } },
       { multi: true },
     );
     return approve;

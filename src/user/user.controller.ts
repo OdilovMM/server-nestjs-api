@@ -28,13 +28,13 @@ export class UserController {
   constructor(private readonly userService: UserService) {}
 
   @Serialize(UserDto)
-  @Post('/sign-up')
+  @Post('/signup')
   async createUser(@Body() createUserDto: CreateUserDto): Promise<UserDto> {
     return await this.userService.create(createUserDto);
   }
 
   @Serialize(UserDto)
-  @Post('/sign-in')
+  @Post('/signin')
   async signInUser(
     @Body() signInDto: SignInDto,
     @Res({ passthrough: true }) res: Response,

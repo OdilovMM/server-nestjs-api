@@ -20,7 +20,7 @@ import { CurrentUser } from 'src/utility/decorators/current-user.decorator';
 import { User } from 'src/user/models/user.model';
 import { Post as PostClass } from './models/post.model';
 
-@Controller('post')
+@Controller('posts')
 export class PostController {
   constructor(private readonly postService: PostService) {}
 

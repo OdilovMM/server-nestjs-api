@@ -23,7 +23,7 @@ export class Category {
     title: string;
 
     @Prop()
-    desc: string;
+    description: string;
 }
 
 export const CategorySchema = SchemaFactory.createForClass(Category);
