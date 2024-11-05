@@ -61,9 +61,7 @@ class ApiFeatures<ResultType, DocType, THelpers = {}> {
 
     if (this.queryStr.tags && this.queryStr.tags.length > 0) {
       this.query = this.query.find({ tags: { $all: this.queryStr.tags } });
-    } else {
-        this.query = this.query.find({tags: {$exists: true, $ne:[]}});
-    }
+    } 
 
     const queryStr = JSON.stringify(queryCopy);
     this.query = this.query.find(JSON.parse(queryStr));

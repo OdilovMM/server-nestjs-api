@@ -112,7 +112,7 @@ export class PostService {
     query: any,
   ): Promise<{ filteredPostCount: number; posts: Post[]; limit: number }> {
     let limit: number;
-    query.limit ? (limit = query.limit) : (limit = 3);
+    query.limit ? (limit = query.limit) : (limit = 4);
 
     const filteredPost = new ApiFeatures(this.postModel.find(), query)
       .search()
