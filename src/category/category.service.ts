@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 import { ObjectId } from 'mongodb';
-import {  Injectable, NotFoundException, Param } from '@nestjs/common';
+import {  Injectable, NotFoundException } from '@nestjs/common';
 import { CreateCategoryDto } from './dto/create-category.dto';
 import { Category, CategoryDocument } from './models/category.model';
 import { Model } from 'mongoose';
@@ -14,7 +14,6 @@ export class CategoryService {
   ) {}
 
   async create(createCategoryDto: CreateCategoryDto): Promise<Category> {
-    console.log(createCategoryDto)
     const category = await this.categoryModel.create(createCategoryDto);
     return category;
   }

@@ -59,7 +59,7 @@ class ApiFeatures<ResultType, DocType, THelpers = {}> {
       queryCopy.category = this.queryStr.category;
     }
 
-    if (this.queryStr.tags && this.queryStr.tags.length > 0) {
+    if (this.queryStr.tags && this.queryStr.tags.length > 0 && typeof this.queryStr.tags !== 'string') {
       this.query = this.query.find({ tags: { $all: this.queryStr.tags } });
     } 
 
