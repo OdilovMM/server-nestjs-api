@@ -26,6 +26,7 @@ export class CommentController {
     @Body() createCommentDto: CreateCommentDto,
     @CurrentUser() currentUser: User,
   ): Promise<Comment> {
+
     return await this.commentService.create(createCommentDto, currentUser);
   }
 

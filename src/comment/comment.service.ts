@@ -29,10 +29,13 @@ export class CommentService {
     const newComment = new this.commentModel({
       postId: post._id.toString(),
       commentBy: currentUser._id.toString(),
-      commentText: createCommentDto.commentText.toString(),
+      commentText: createCommentDto.commentText,
       commentAt: new Date(),
     });
-    return await this.commentModel.create(newComment);
+
+
+    return  await newComment.save();
+    
   }
 
   // TODO get comments
