@@ -64,4 +64,7 @@ export class PostController {
   ): Promise<string[]> {
     return await this.postService.likes(new ObjectId(postId), currentUser);
   }
+
+  // TODO Implement a file upload for both user and post
+  // TODO Implement a swaggerUI for endpoints
 }
