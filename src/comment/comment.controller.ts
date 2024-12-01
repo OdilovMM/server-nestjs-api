@@ -33,7 +33,7 @@ export class CommentController {
   // TODO get comments
 
   @Get('/:id')
-  @UseGuards(AuthenticationGuard)
+  // @UseGuards(AuthenticationGuard)
   async findAll(@Param('id') id: string): Promise<Comment[]> {
     return await this.commentService.findAll(id);
   }

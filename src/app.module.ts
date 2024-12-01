@@ -11,7 +11,7 @@ import { CurrentUserMiddleware } from './utility/middlewares/current-user.middle
 config();
 
 @Module({
-  imports: [MongooseModule.forRoot(process.env.DB_URL), UserModule, PostModule, CategoryModule, TagModule, CommentModule],
+  imports: [MongooseModule.forRoot(process.env.MONGO), UserModule, PostModule, CategoryModule, TagModule, CommentModule],
   controllers: [],
   providers: [],
 })
