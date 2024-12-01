@@ -13,7 +13,7 @@ export class CreatePostDto {
 
     @IsNotEmpty({message: 'Excerpt is required'})
     @IsString({message: 'Excerpt should be string'})
-    @MaxLength(350, {message: 'Excerpt max length is 350 characters.'})
+    @MaxLength(2000, {message: 'Excerpt max length is 2000 characters.'})
     excerpt: string;
 
     @IsNotEmpty({message: 'Images is required'})
