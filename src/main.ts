@@ -2,7 +2,7 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { config } from 'dotenv';
-config({path: '.env'});
+config({path: '.env'})
 import * as cookieParser from 'cookie-parser'
 import { ValidationPipe } from '@nestjs/common';
 

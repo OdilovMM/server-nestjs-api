@@ -20,12 +20,14 @@ export class CurrentUserMiddleware implements NestMiddleware {
     async use(req: Request, res: Response, next: NextFunction) {
         try {
             const {jwt} = req.cookies;
+            console.log(jwt)
             const {_id} = <JwtPayload>(verify(jwt, process.env.TOKEN_SECRET));
             const currentUser = await this.userService.findOneForMiddleware(new ObjectId(_id));
             req.currentUser = currentUser;
             next();
         } catch (error) {
             req.currentUser = null;
+            console.log(error)
             next()
         }
     }
